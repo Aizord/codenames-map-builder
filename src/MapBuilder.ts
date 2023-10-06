@@ -1,9 +1,12 @@
+import { Card } from "./Map";
 
 export default function buildMap(startingTeam: string = "red") {
     const numRows: number = 5;
     const numColumns: number = 5;
 
-    const model: number[][] = Array.from({ length: numRows }, () => Array(numColumns).fill(0));
+    const model: Card[][] = Array.from({ length: 5 }, () =>
+        Array.from({ length: 5 }, () => ({ value: 0, text: "" }))
+    );;
 
     // Generating 7 white, blue, and red cards
     for (let i = 0; i < 3; i++) {
@@ -15,9 +18,9 @@ export default function buildMap(startingTeam: string = "red") {
             do {
                 randomRow = Math.floor(Math.random() * numRows);
                 randomColumn = Math.floor(Math.random() * numColumns);
-            } while (model[randomRow][randomColumn] !== 0);
+            } while (model[randomRow][randomColumn].value !== 0);
 
-            model[randomRow][randomColumn] = i + 1;
+            model[randomRow][randomColumn].value = i + 1;
         }
     }
 
@@ -29,12 +32,12 @@ export default function buildMap(startingTeam: string = "red") {
     do {
         randomRow = Math.floor(Math.random() * numRows);
         randomColumn = Math.floor(Math.random() * numColumns);
-    } while (model[randomRow][randomColumn] !== 0);
+    } while (model[randomRow][randomColumn].value !== 0);
 
     if (startingTeam === "red") {
-        model[randomRow][randomColumn] = 3;
+        model[randomRow][randomColumn].value = 3;
     } else {
-        model[randomRow][randomColumn] = 2;
+        model[randomRow][randomColumn].value = 2;
     }
 
     for (let k = 0; k < 2; k++) {
@@ -42,12 +45,12 @@ export default function buildMap(startingTeam: string = "red") {
         do {
             randomRow = Math.floor(Math.random() * numRows);
             randomColumn = Math.floor(Math.random() * numColumns);
-        } while (model[randomRow][randomColumn] !== 0);
+        } while (model[randomRow][randomColumn].value !== 0);
 
         if (startingTeam === "red") {
-            model[randomRow][randomColumn] = 2;
+            model[randomRow][randomColumn].value = 2;
         } else {
-            model[randomRow][randomColumn] = 3;
+            model[randomRow][randomColumn].value = 3;
         }
     }
 
